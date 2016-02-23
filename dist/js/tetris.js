@@ -78,7 +78,6 @@ var Tetris = {
                 ctx.fillStyle ="rgb(222,40,16)";
                 ctx.fillRect(0,0,w,h);
                 ctx.restore();
-
                 ctx.translate(0,0);
                 this.drawStar(w/10,w/6,w/6,53.8,"#ffde00");
                 this.drawStar(w/30,w/3,w/15,0,"#ffde00");

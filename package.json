@@ -1,16 +1,17 @@
 {
   "name": "tetris",
   "version": "1.0.0",
-  "description": "a javascript game of tetris",
+  "description": "a Russian tile-matching puzzle video game",
   "keywords": [
     "javascript",
-    "game",
+    "games",
     "tetris"
   ],
-  "main": "dist/js/main.js",
+  "main": "dist/js/tetris.js",
   "author": "dewlyer",
   "license": "MIT",
   "devDependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-jade": "^1.1.0",
     "gulp-rename": "^1.2.2",
