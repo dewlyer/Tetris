@@ -3,14 +3,15 @@
     'use strict';
     var pkg =  require('./package.json'),
         fs = require('fs'),
-        del = require('del'),
         gulp = require('gulp'),
         jade = require('gulp-jade'),
         sass = require('gulp-sass'),
+        clean = require('gulp-clean'),
         uglify = require('gulp-uglify'),
         header = require('gulp-header'),
         rename = require('gulp-rename');
 
+    var debug = false;
     var paths = {
         html: {
             src: 'src/html/*.jade',
@@ -35,18 +36,21 @@
         license: pkg.license
     };
 
-    gulp.task('clean:html', function(cb){
-        return del([paths.html.dest+'/**/*'], cb);
+    gulp.task('clean:html', function(){
+        return gulp.src(paths.html.dest+'/**/*', {read: false})
+            .pipe(clean());
     });
     gulp.task('clean:css', function(cb){
-        return del([paths.css.dest+'/**/*'], cb);
+        return gulp.src(paths.css.dest+'/**/*', {read: false})
+            .pipe(clean());
     });
     gulp.task('clean:js', function(cb){
-        return del([paths.js.dest+'/**/*'], cb);
+        return gulp.src(paths.js.dest+'/**/*', {read: false})
+            .pipe(clean());
     });
 
     gulp.task('html', ['clean:html'], function(){
-        gulp.src(paths.html.src)
+        return gulp.src(paths.html.src)
             .pipe(jade({
                 pretty: true,
                 data: {
@@ -60,24 +64,37 @@
     });
 
     gulp.task('css', ['clean:css'], function(){
-        gulp.src(paths.css.src)
-            .pipe(sass({outputStyle: 'nested'}))
-            .pipe(gulp.dest(paths.css.dest))
-            .pipe(sass({outputStyle: 'compressed'}))
-            .pipe(header(copyright, packages))
-            .pipe(rename({
-                suffix: ".min"
-            }))
+        var stream = gulp.src(paths.css.src);
+        stream = stream.pipe(sass({outputStyle: 'nested'}))
             .pipe(gulp.dest(paths.css.dest));
+        if(debug){
+            return stream;
+        }
+        else {
+            return stream.pipe(sass({outputStyle: 'compressed'}))
+                .pipe(header(copyright, packages))
+                .pipe(rename({suffix: ".min"}))
+                .pipe(gulp.dest(paths.css.dest));
+        }
     });
 
     gulp.task('js', ['clean:js'], function(){
-        gulp.src(paths.js.src)
-            .pipe(gulp.dest(paths.js.dest))
-            .pipe(rename({suffix: '.min'}))
-            .pipe(uglify())
-            .pipe(header(copyright, packages))
-            .pipe(gulp.dest(paths.js.dest))
+        var stream = gulp.src(paths.js.src);
+        stream = stream.pipe(gulp.dest(paths.js.dest));
+        if(debug){
+            return stream;
+        }
+        else {
+            return stream.pipe(uglify())
+                .pipe(header(copyright, packages))
+                .pipe(rename({suffix: '.min'}))
+                .pipe(gulp.dest(paths.js.dest));
+        }
+    });
+
+    gulp.task('debug', function(){
+        debug = true;
+        gulp.start('default');
     });
 
     gulp.task('default', ['html', 'css', 'js']);
