@@ -1,1 +1,10 @@
-html,body{height:100%}.game-panel{display:block;width:100%;height:100%}
+/*!
+ * tetris 1.0.0
+ * a Russian tile-matching puzzle video game
+ * https://github.com/dewlyer/tetris.git
+ *
+ * Copyright (c) 2016 dewlyer dewlyer@gmail.com
+ *
+ * Released under the MIT license
+ */
+ html,body{height:100%}.game-panel{display:block;width:100%;height:100%}

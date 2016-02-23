@@ -2,11 +2,13 @@
 
     'use strict';
     var pkg =  require('./package.json'),
+        fs = require('fs'),
         del = require('del'),
         gulp = require('gulp'),
         jade = require('gulp-jade'),
         sass = require('gulp-sass'),
         uglify = require('gulp-uglify'),
+        header = require('gulp-header'),
         rename = require('gulp-rename');
 
     var paths = {
@@ -22,6 +24,15 @@
             src: 'src/js/**/*.js',
             dest: 'dist/js'
         }
+    };
+    var copyright = fs.readFileSync('copyright');
+    var packages = {
+        name: pkg.name,
+        version: pkg.version,
+        description: pkg.description,
+        author: pkg.author,
+        repository: pkg.repository.url,
+        license: pkg.license
     };
 
     gulp.task('clean:html', function(cb){
@@ -53,6 +64,7 @@
             .pipe(sass({outputStyle: 'nested'}))
             .pipe(gulp.dest(paths.css.dest))
             .pipe(sass({outputStyle: 'compressed'}))
+            .pipe(header(copyright, packages))
             .pipe(rename({
                 suffix: ".min"
             }))
@@ -64,6 +76,7 @@
             .pipe(gulp.dest(paths.js.dest))
             .pipe(rename({suffix: '.min'}))
             .pipe(uglify())
+            .pipe(header(copyright, packages))
             .pipe(gulp.dest(paths.js.dest))
     });
 
