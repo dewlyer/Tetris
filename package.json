@@ -12,7 +12,7 @@
     "type": "git",
     "url": "https://github.com/dewlyer/tetris.git"
   },
-  "author": "dewlyer",
+  "author": "dewlyer dewlyer@gmial.com",
   "license": "MIT",
   "devDependencies": {
     "gulp": "^3.9.1",
