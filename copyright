@@ -3,7 +3,7 @@
  * <%= description %>
  * <%= repository %>
  *
- * Copyright (c) 2016 <%= author %> <%= author %>@gmail.com
+ * Copyright (c) 2016 <%= author %>
  *
  * Released under the <%= license %> license
  */
