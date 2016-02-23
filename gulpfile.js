@@ -22,6 +22,7 @@
             dest: 'dist/js'
         }
     };
+
     gulp.task('html', function(){
         gulp.src(paths.html.src)
             .pipe(jade({
