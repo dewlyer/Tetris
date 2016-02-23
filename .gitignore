@@ -1,0 +1,8 @@
+/.idea
+/node_modules
+src
+.bower.json
+AUTHORS.txt
+bower.json
+LICENSE.txt
+README.md
