@@ -1,7 +1,12 @@
 html, body {
   height: 100%; }
 
-.game-panel {
+.tetris-game-holder {
+  display: block;
+  width: 100%;
+  height: 100%; }
+
+.tetris-canvas {
   display: block;
   width: 100%;
   height: 100%; }

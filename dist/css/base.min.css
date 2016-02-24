@@ -3,7 +3,7 @@
  * a Russian tile-matching puzzle video game
  * https://github.com/dewlyer/tetris.git
  *
- * Copyright (c) 2016 dewlyer dewlyer@gmail.com
+ * Copyright (c) 2016 dewlyer dewlyer@gmial.com
  *
  * Released under the MIT license
  */
